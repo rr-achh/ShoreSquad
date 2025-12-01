@@ -1,6 +1,13 @@
 // ============================================
 // ShoreSquad JavaScript - Modern, Performant, Accessible
+// 
+// Week 1: Setup & Skeleton ✅
+// Week 2: MVP with Mock Data ✅
+// Week 3: Real NEA API Integration ✅
+// Week 4: Polish & Launch ✅
 // ============================================
+
+console.log('🌊 ShoreSquad Loading...');
 
 // ============================================
 // Utility Functions
@@ -108,6 +115,10 @@ const initScrollAnimations = () => {
   // Observe stat counters
   const statNumbers = document.querySelectorAll('.stat-number[data-count]');
   statNumbers.forEach((el) => animateOnScroll.observe(el));
+  
+  // Observe impact tracker cards
+  const trackerCards = document.querySelectorAll('.tracker-card');
+  trackerCards.forEach((el) => animateOnScroll.observe(el));
 };
 
 // ============================================
@@ -749,7 +760,7 @@ const init = () => {
     logPerformanceMetrics();
   }
   
-  console.log('✅ ShoreSquad ready!');
+  console.log('✅ ShoreSquad ready, lah! 🌊');
 };
 
 // ============================================
