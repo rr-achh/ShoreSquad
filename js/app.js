@@ -42,6 +42,19 @@ const throttle = (func, limit = 100) => {
 };
 
 /**
+ * Show loading spinner in container
+ * @param {HTMLElement} container - Container to show spinner in
+ */
+const showLoadingSpinner = (container) => {
+  container.innerHTML = `
+    <div class="loading-spinner" role="status" aria-live="polite">
+      <div class="spinner"></div>
+      <p>Loading cleanups...</p>
+    </div>
+  `;
+};
+
+/**
  * Animate counter with easing
  * @param {HTMLElement} element - Element to animate
  * @param {number} target - Target number
@@ -428,12 +441,16 @@ const loadCleanupCards = async () => {
   const cleanupsGrid = document.querySelector('.cleanups-grid');
   if (!cleanupsGrid) return;
   
-  // Fetch real weather data
-  const weatherData = await fetchWeatherData();
-  const tempData = await fetchTemperature();
-  
-  // Remove skeleton loaders
-  cleanupsGrid.innerHTML = '';
+  try {
+    // Show loading spinner
+    showLoadingSpinner(cleanupsGrid);
+    
+    // Fetch real weather data
+    const weatherData = await fetchWeatherData();
+    const tempData = await fetchTemperature();
+    
+    // Remove loading spinner
+    cleanupsGrid.innerHTML = '';
   
   // Update cleanup cards with real weather if available
   if (weatherData && weatherData.data) {
@@ -469,6 +486,16 @@ const loadCleanupCards = async () => {
   
   // Display weather forecast section
   displayWeatherForecast(weatherData);
+  
+  } catch (error) {
+    console.error('Error loading cleanup cards:', error);
+    cleanupsGrid.innerHTML = `
+      <div class="error-message">
+        <p>⚠️ Unable to load cleanups. Please refresh the page.</p>
+      </div>
+    `;
+    showNotification('Failed to load cleanup data', 'error');
+  }
 };
 
 /**
@@ -536,8 +563,6 @@ const handleJoinCleanup = (cleanup) => {
  * Display 4-day weather forecast
  */
 const displayWeatherForecast = (weatherData) => {
-  if (!weatherData || !weatherData.data) return;
-  
   // Find or create weather forecast section
   let forecastSection = document.querySelector('.weather-forecast-section');
   
@@ -553,6 +578,17 @@ const displayWeatherForecast = (weatherData) => {
     }
   }
   
+  // Handle error case
+  if (!weatherData || !weatherData.data) {
+    forecastSection.innerHTML = `
+      <div class="weather-forecast-error">
+        <div class="error-icon">⚠️</div>
+        <h3>Unable to load weather forecast</h3>
+        <p>Please check your internet connection and try again later.</p>
+      </div>
+    `;
+    return;
+  }
   const forecasts = weatherData.data.records || [];
   
   let forecastHTML = `
