@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShoreSquad - Rally your crew, track weather, and hit the next beach cleanup with our dope map app!">
+    <meta name="keywords" content="beach cleanup, environmental, community, ocean conservation, weather tracking">
+    <meta name="author" content="ShoreSquad Team">
+    <meta name="theme-color" content="#0EA5E9">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ShoreSquad - Beach Cleanup Coordination">
+    <meta property="og:description" content="Rally your crew, track weather, and hit the next beach cleanup!">
+    <meta property="og:image" content="/assets/og-image.jpg">
+    
+    <title>ShoreSquad - Rally Your Crew for Beach Cleanups</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header / Navigation -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <div class="logo">
+                <span class="logo-icon">🌊</span>
+                <span class="logo-text">ShoreSquad</span>
+            </div>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#cleanups" class="nav-link">Find Cleanups</a></li>
+                <li><a href="#impact" class="nav-link">Our Impact</a></li>
+                <li><a href="#crew" class="nav-link">Join a Crew</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="btn btn-secondary" aria-label="Get location">
+                    <span aria-hidden="true">📍</span> Near Me
+                </button>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-content">
+                <h1 id="hero-heading" class="hero-title">
+                    Rally Your Crew.<br>
+                    <span class="highlight">Save Our Shores.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Track weather, find cleanups, and make eco-action fun with your squad. 
+                    Join thousands cleaning beaches worldwide! 🏖️
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-large btn-primary">Start Your First Cleanup</button>
+                    <button class="btn btn-large btn-outline">Watch How It Works</button>
+                </div>
+                
+                <!-- Stats Counter -->
+                <div class="stats-row" role="region" aria-label="Impact statistics">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="25000">0</span>
+                        <span class="stat-label">Cleanups Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="500000">0</span>
+                        <span class="stat-label">Lbs Trash Collected</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="15000">0</span>
+                        <span class="stat-label">Active Squad Members</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="hero-image-placeholder">
+                    <!-- Placeholder for hero image/illustration -->
+                    <div class="floating-card card-weather">
+                        <span class="icon">☀️</span>
+                        <span class="text">72°F Perfect Weather!</span>
+                    </div>
+                    <div class="floating-card card-crew">
+                        <span class="icon">👥</span>
+                        <span class="text">15 Squad Members Ready</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section" aria-labelledby="features-heading">
+            <div class="container">
+                <h2 id="features-heading" class="section-title">Why ShoreSquad Rocks</h2>
+                <p class="section-subtitle">Everything you need to organize epic beach cleanups</p>
+                
+                <div class="features-grid">
+                    <article class="feature-card" data-animate>
+                        <div class="feature-icon">🗺️</div>
+                        <h3 class="feature-title">Interactive Map</h3>
+                        <p class="feature-description">
+                            Find cleanups near you, discover hotspots, and navigate to beaches with real-time directions.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card" data-animate>
+                        <div class="feature-icon">🌤️</div>
+                        <h3 class="feature-title">Weather Tracking</h3>
+                        <p class="feature-description">
+                            Check forecasts, get alerts for perfect cleanup days, and plan around the weather.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card" data-animate>
+                        <div class="feature-icon">👥</div>
+                        <h3 class="feature-title">Squad Up</h3>
+                        <p class="feature-description">
+                            Create or join crews, coordinate meetups, and make lasting friendships with fellow eco-warriors.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card" data-animate>
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Track Impact</h3>
+                        <p class="feature-description">
+                            Log your cleanups, see your stats grow, earn badges, and visualize your environmental impact.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card" data-animate>
+                        <div class="feature-icon">📱</div>
+                        <h3 class="feature-title">Social Feed</h3>
+                        <p class="feature-description">
+                            Share photos, celebrate wins, inspire others, and build a movement together.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card" data-animate>
+                        <div class="feature-icon">🏆</div>
+                        <h3 class="feature-title">Challenges & Rewards</h3>
+                        <p class="feature-description">
+                            Complete monthly challenges, compete with other squads, and unlock exclusive perks.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Cleanups Section -->
+        <section id="cleanups" class="cleanups-section" aria-labelledby="cleanups-heading">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 id="cleanups-heading" class="section-title">Upcoming Cleanups</h2>
+                        <p class="section-subtitle">Join a cleanup near you this week</p>
+                    </div>
+                    <button class="btn btn-outline">View All on Map</button>
+                </div>
+                
+                <div class="cleanups-grid" role="list">
+                    <!-- Cleanup cards will be dynamically loaded via JavaScript -->
+                    <div class="cleanup-card-skeleton" aria-hidden="true"></div>
+                    <div class="cleanup-card-skeleton" aria-hidden="true"></div>
+                    <div class="cleanup-card-skeleton" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact" class="impact-section" aria-labelledby="impact-heading">
+            <div class="container">
+                <h2 id="impact-heading" class="section-title">Our Collective Impact</h2>
+                <p class="section-subtitle">Together, we're making waves of change</p>
+                
+                <div class="impact-grid">
+                    <div class="impact-visual">
+                        <!-- Placeholder for chart/visualization -->
+                        <div class="impact-chart"></div>
+                    </div>
+                    
+                    <div class="impact-content">
+                        <div class="impact-stat">
+                            <h3 class="impact-number">500K+</h3>
+                            <p class="impact-label">Pounds of trash removed from beaches</p>
+                        </div>
+                        <div class="impact-stat">
+                            <h3 class="impact-number">350+</h3>
+                            <p class="impact-label">Beaches cleaned across 40 countries</p>
+                        </div>
+                        <div class="impact-stat">
+                            <h3 class="impact-number">15K+</h3>
+                            <p class="impact-label">Active volunteers making a difference</p>
+                        </div>
+                        
+                        <blockquote class="testimonial">
+                            <p>"ShoreSquad turned my Sunday beach walks into meaningful action. Now I'm part of a crew that's actually changing our coastline!"</p>
+                            <cite>— Maya, Santa Monica Squad Leader</cite>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" aria-labelledby="cta-heading">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 id="cta-heading" class="cta-title">Ready to Make Waves?</h2>
+                    <p class="cta-subtitle">Join ShoreSquad today and start your beach cleanup journey</p>
+                    <form class="signup-form" role="form" aria-label="Sign up form">
+                        <div class="form-group">
+                            <label for="email-input" class="sr-only">Email address</label>
+                            <input 
+                                type="email" 
+                                id="email-input" 
+                                class="form-input" 
+                                placeholder="Enter your email" 
+                                required
+                                aria-required="true"
+                            >
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">Get Started Free</button>
+                    </form>
+                    <p class="cta-note">No credit card required. Start cleaning in under 2 minutes.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🌊</span>
+                        <span class="logo-text">ShoreSquad</span>
+                    </div>
+                    <p class="footer-tagline">Making beach cleanups social, simple, and impactful.</p>
+                    <div class="social-links" role="navigation" aria-label="Social media">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <span aria-hidden="true">📷</span>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <span aria-hidden="true">🐦</span>
+                        </a>
+                        <a href="#" class="social-link" aria-label="TikTok">
+                            <span aria-hidden="true">🎵</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#cleanups">Find Cleanups</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="#crew">Join a Crew</a></li>
+                        <li><a href="#">Start a Squad</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Events</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-heading">Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 ShoreSquad. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/app.js" defer></script>
+</body>
+</html>
