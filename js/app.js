@@ -462,42 +462,42 @@ const loadCleanupCards = async () => {
     
     // Remove loading spinner
     cleanupsGrid.innerHTML = '';
-  
-  // Update cleanup cards with real weather if available
-  if (weatherData && weatherData.data) {
-    const forecasts = weatherData.data.records;
     
-    mockCleanups.forEach((cleanup, index) => {
-      // Update weather from API if available
-      if (forecasts && forecasts[index]) {
-        const forecast = forecasts[index];
-        const temp = forecast.temperature?.high || 30;
-        cleanup.weather = `${getWeatherIcon(forecast.forecast)} ${temp}°C`;
-      }
+    // Update cleanup cards with real weather if available
+    if (weatherData && weatherData.data) {
+      const forecasts = weatherData.data.records;
       
-      const card = createCleanupCard(cleanup);
-      cleanupsGrid.appendChild(card);
-      
-      // Stagger animation
-      setTimeout(() => {
-        card.classList.add('animate-in');
-      }, index * 100);
-    });
-  } else {
-    // Fallback to mock data if API fails
-    mockCleanups.forEach((cleanup, index) => {
-      const card = createCleanupCard(cleanup);
-      cleanupsGrid.appendChild(card);
-      
-      setTimeout(() => {
-        card.classList.add('animate-in');
-      }, index * 100);
-    });
-  }
-  
-  // Display weather forecast section
-  displayWeatherForecast(weatherData);
-  
+      mockCleanups.forEach((cleanup, index) => {
+        // Update weather from API if available
+        if (forecasts && forecasts[index]) {
+          const forecast = forecasts[index];
+          const temp = forecast.temperature?.high || 30;
+          cleanup.weather = `${getWeatherIcon(forecast.forecast)} ${temp}°C`;
+        }
+        
+        const card = createCleanupCard(cleanup);
+        cleanupsGrid.appendChild(card);
+        
+        // Stagger animation
+        setTimeout(() => {
+          card.classList.add('animate-in');
+        }, index * 100);
+      });
+    } else {
+      // Fallback to mock data if API fails
+      mockCleanups.forEach((cleanup, index) => {
+        const card = createCleanupCard(cleanup);
+        cleanupsGrid.appendChild(card);
+        
+        setTimeout(() => {
+          card.classList.add('animate-in');
+        }, index * 100);
+      });
+    }
+    
+    // Display weather forecast section
+    displayWeatherForecast(weatherData);
+    
   } catch (error) {
     console.error('Error loading cleanup cards:', error);
     cleanupsGrid.innerHTML = `
