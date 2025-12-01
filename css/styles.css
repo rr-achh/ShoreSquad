@@ -562,6 +562,126 @@ button {
   gap: var(--spacing-md);
 }
 
+/* Weather Forecast Section */
+.weather-forecast-section {
+  background: linear-gradient(135deg, #E0F2FE 0%, #DBEAFE 100%);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-3xl);
+  box-shadow: var(--shadow-md);
+}
+
+.weather-forecast-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.forecast-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-navy);
+  margin-bottom: var(--spacing-sm);
+}
+
+.forecast-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-slate);
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.forecast-card {
+  background: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.forecast-card.animate-in {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.forecast-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.forecast-day {
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-lg);
+}
+
+.forecast-icon {
+  font-size: 3rem;
+  margin: var(--spacing-md) 0;
+}
+
+.forecast-temp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-primary);
+}
+
+.temp-high {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-accent-orange);
+}
+
+.temp-separator {
+  color: var(--color-slate-light);
+  font-size: var(--font-size-xl);
+}
+
+.temp-low {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.forecast-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-slate);
+  margin-top: var(--spacing-sm);
+}
+
+.forecast-footer {
+  text-align: center;
+  padding-top: var(--spacing-lg);
+  border-top: 2px solid rgba(14, 165, 233, 0.2);
+}
+
+.forecast-source {
+  font-size: var(--font-size-sm);
+  color: var(--color-slate);
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.forecast-updated {
+  font-size: var(--font-size-xs);
+  color: var(--color-slate-light);
+}
+
+@media (min-width: 768px) {
+  .forecast-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* Map Container Styles */
 .map-container {
   background: white;

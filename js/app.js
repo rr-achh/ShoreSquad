@@ -324,66 +324,151 @@ const getCurrentPosition = () => {
 };
 
 // ============================================
+// Weather API Integration (NEA Singapore)
+// ============================================
+
+/**
+ * Fetch real-time weather data from NEA (Singapore)
+ * API Documentation: https://data.gov.sg
+ */
+const fetchWeatherData = async () => {
+  try {
+    // NEA 4-Day Weather Forecast API
+    const response = await fetch('https://api-open.data.gov.sg/v2/real-time/api/four-day-outlook');
+    
+    if (!response.ok) {
+      throw new Error(`Weather API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch weather data:', error);
+    return null;
+  }
+};
+
+/**
+ * Fetch current air temperature readings
+ */
+const fetchTemperature = async () => {
+  try {
+    const response = await fetch('https://api-open.data.gov.sg/v2/real-time/api/air-temperature');
+    
+    if (!response.ok) {
+      throw new Error(`Temperature API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch temperature:', error);
+    return null;
+  }
+};
+
+/**
+ * Get weather icon based on forecast
+ */
+const getWeatherIcon = (forecast) => {
+  const forecastLower = forecast.toLowerCase();
+  if (forecastLower.includes('rain') || forecastLower.includes('shower')) return '🌧️';
+  if (forecastLower.includes('thunder')) return '⛈️';
+  if (forecastLower.includes('cloudy')) return '☁️';
+  if (forecastLower.includes('partly')) return '⛅';
+  if (forecastLower.includes('fair') || forecastLower.includes('sunny')) return '☀️';
+  return '🌤️';
+};
+
+// ============================================
 // Dynamic Cleanup Cards
 // ============================================
 
-// Mock data for cleanup events
+// Singapore beach cleanup locations
 const mockCleanups = [
   {
     id: 1,
-    title: 'Santa Monica Sunrise Cleanup',
-    location: 'Santa Monica Beach, CA',
+    title: 'Pasir Ris Beach Sunrise Cleanup',
+    location: 'Pasir Ris Beach, Singapore',
     date: '2025-12-05',
     time: '7:00 AM',
     attendees: 24,
-    weather: '☀️ 20°C',
+    weather: '☀️ 28°C',
     difficulty: 'Easy',
     image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400',
   },
   {
     id: 2,
-    title: 'Malibu Crew Beach Sweep',
-    location: 'Malibu Coast, CA',
+    title: 'East Coast Park Beach Sweep',
+    location: 'East Coast Park, Singapore',
     date: '2025-12-06',
     time: '8:30 AM',
     attendees: 18,
-    weather: '⛅ 22°C',
+    weather: '⛅ 29°C',
     difficulty: 'Moderate',
     image: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400',
   },
   {
     id: 3,
-    title: 'Venice Beach Squad Day',
-    location: 'Venice Beach, CA',
+    title: 'Sentosa Beach Squad Day',
+    location: 'Sentosa Beach, Singapore',
     date: '2025-12-07',
     time: '9:00 AM',
     attendees: 32,
-    weather: '☀️ 24°C',
+    weather: '☀️ 30°C',
     difficulty: 'Easy',
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400',
   },
 ];
 
 /**
- * Load and render cleanup cards
+ * Load and render cleanup cards with real weather data
  */
-const loadCleanupCards = () => {
+const loadCleanupCards = async () => {
   const cleanupsGrid = document.querySelector('.cleanups-grid');
   if (!cleanupsGrid) return;
+  
+  // Fetch real weather data
+  const weatherData = await fetchWeatherData();
+  const tempData = await fetchTemperature();
   
   // Remove skeleton loaders
   cleanupsGrid.innerHTML = '';
   
-  // Render cleanup cards
-  mockCleanups.forEach((cleanup, index) => {
-    const card = createCleanupCard(cleanup);
-    cleanupsGrid.appendChild(card);
+  // Update cleanup cards with real weather if available
+  if (weatherData && weatherData.data) {
+    const forecasts = weatherData.data.records;
     
-    // Stagger animation
-    setTimeout(() => {
-      card.classList.add('animate-in');
-    }, index * 100);
-  });
+    mockCleanups.forEach((cleanup, index) => {
+      // Update weather from API if available
+      if (forecasts && forecasts[index]) {
+        const forecast = forecasts[index];
+        const temp = forecast.temperature?.high || 30;
+        cleanup.weather = `${getWeatherIcon(forecast.forecast)} ${temp}°C`;
+      }
+      
+      const card = createCleanupCard(cleanup);
+      cleanupsGrid.appendChild(card);
+      
+      // Stagger animation
+      setTimeout(() => {
+        card.classList.add('animate-in');
+      }, index * 100);
+    });
+  } else {
+    // Fallback to mock data if API fails
+    mockCleanups.forEach((cleanup, index) => {
+      const card = createCleanupCard(cleanup);
+      cleanupsGrid.appendChild(card);
+      
+      setTimeout(() => {
+        card.classList.add('animate-in');
+      }, index * 100);
+    });
+  }
+  
+  // Display weather forecast section
+  displayWeatherForecast(weatherData);
 };
 
 /**
@@ -445,6 +530,76 @@ const handleJoinCleanup = (cleanup) => {
   }
   
   console.log('Joined cleanup:', cleanup);
+};
+
+/**
+ * Display 4-day weather forecast
+ */
+const displayWeatherForecast = (weatherData) => {
+  if (!weatherData || !weatherData.data) return;
+  
+  // Find or create weather forecast section
+  let forecastSection = document.querySelector('.weather-forecast-section');
+  
+  if (!forecastSection) {
+    forecastSection = document.createElement('div');
+    forecastSection.className = 'weather-forecast-section';
+    forecastSection.setAttribute('role', 'region');
+    forecastSection.setAttribute('aria-label', '4-Day Weather Forecast');
+    
+    const mapContainer = document.querySelector('.map-container');
+    if (mapContainer) {
+      mapContainer.parentNode.insertBefore(forecastSection, mapContainer.nextSibling);
+    }
+  }
+  
+  const forecasts = weatherData.data.records || [];
+  
+  let forecastHTML = `
+    <div class="weather-forecast-header">
+      <h3 class="forecast-title">🌤️ 4-Day Weather Forecast</h3>
+      <p class="forecast-subtitle">Plan your beach cleanups with Singapore's official weather data</p>
+    </div>
+    <div class="forecast-grid">
+  `;
+  
+  forecasts.forEach((day, index) => {
+    const date = new Date(day.date || day.timestamp);
+    const dayName = date.toLocaleDateString('en-SG', { weekday: 'short', month: 'short', day: 'numeric' });
+    const forecast = day.forecast || 'Partly Cloudy';
+    const tempHigh = day.temperature?.high || 32;
+    const tempLow = day.temperature?.low || 26;
+    const icon = getWeatherIcon(forecast);
+    
+    forecastHTML += `
+      <div class="forecast-card" data-animate>
+        <div class="forecast-day">${dayName}</div>
+        <div class="forecast-icon">${icon}</div>
+        <div class="forecast-temp">
+          <span class="temp-high">${tempHigh}°C</span>
+          <span class="temp-separator">/</span>
+          <span class="temp-low">${tempLow}°C</span>
+        </div>
+        <div class="forecast-description">${forecast}</div>
+      </div>
+    `;
+  });
+  
+  forecastHTML += `
+    </div>
+    <div class="forecast-footer">
+      <p class="forecast-source">Data provided by National Environment Agency (NEA) Singapore</p>
+      <p class="forecast-updated">Last updated: ${new Date().toLocaleString('en-SG')}</p>
+    </div>
+  `;
+  
+  forecastSection.innerHTML = forecastHTML;
+  
+  // Animate forecast cards
+  setTimeout(() => {
+    const forecastCards = forecastSection.querySelectorAll('.forecast-card');
+    forecastCards.forEach((card) => animateOnScroll.observe(card));
+  }, 100);
 };
 
 // ============================================
